@@ -1,297 +1,475 @@
-
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Guide complet des étapes de la 'Omra">
   <title>Les étapes de la 'Omra</title>
-  <link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-  <script>
-  // Affiche le bouton après défilement
-  const scrollBtn = document.getElementById("scrollTopBtn");
- 
-  scrollBtn.onclick = function () {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-</script>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Montserrat:wght@400;600&display=swap"
+    rel="stylesheet">
+  <link rel="manifest" href="manifest.json">
   <style>
-    #scrollTopBtn {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 999;
-  background-color: #1987b7;
-  color: white;
-  border: none;
-  outline: none;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  font-size: 24px;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-  transition: background-color 0.3s;
-}
+    :root {
+      --primary-color: #1987b7;
+      --secondary-color: #eaf6fb;
+      --text-color: #333;
+      --light-color: #f8f9fa;
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
 
-#scrollTopBtn:hover {
-  background-color: #146a90;
-}
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
+      padding: 0;
+    }
+
+    body {
       font-family: 'Montserrat', sans-serif;
-      background: #f8f9fa;
-      color: #333;
+      background: var(--light-color);
+      color: var(--text-color);
       line-height: 1.6;
+      overflow-x: hidden;
     }
+
     header {
-      background: #1987b7;
+      background: var(--primary-color);
       color: white;
-      padding: 1rem;
+      padding: 1.5rem 1rem;
       text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
-    nav {
-      background: #eaf6fb;
-      padding: 0.5rem;
+
+    h1 {
+      font-size: 1.8rem;
     }
-    nav a {
-      margin: 0 0.5rem;
-      color: #1987b7;
-      text-decoration: none;
-      font-weight: bold;
+
+    h2 {
+      color: var(--primary-color);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
     }
-    section {
+
+    h3 {
+      font-size: 1.2rem;
+      margin: 1rem 0 0.5rem;
+      color: var(--text-color);
+    }
+
+    .chapter {
+      max-width: 800px;
+      margin: 0 auto;
       padding: 1rem;
-      min-height: 100vh;
-      scroll-snap-align: start;
-      transition: transform 0.6s ease-in-out;
     }
-    section img {
-      max-width: 380px;
-      margin: 15px 0;
+
+    section {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: white;
+      /* border-radius: 8px; */
+      /* box-shadow: var(--shadow); */
     }
+
     .arabe {
       font-family: 'Amiri Quran', serif;
       direction: rtl;
       text-align: right;
       font-size: 1.2rem;
+      margin: 1rem 0;
+      line-height: 2;
     }
-    .chapter {
-      scroll-snap-type: y mandatory;
-      overflow-y: scroll;
-      height: 100vh;
-    }
-    h2 {
-      color: #1987b7;
-      font-size: 1.4rem;
-    }
+
     .center {
       text-align: center;
     }
+
     .bold {
       font-weight: bold;
     }
+
     ul {
-      list-style: none;
+      list-style-position: inside;
+      margin: 1rem 0;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 1rem auto;
+      border-radius: 4px;
+    }
+
+    #scrollTopBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      outline: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: all 0.3s;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    #scrollTopBtn.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    #scrollTopBtn:hover {
+      background-color: #146a90;
+      transform: translateY(-3px);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+      }
+
+      section {
+        padding: 1rem;
+      }
+
+      .chapter {
+        padding: 0.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.3rem;
+      }
+
+      .arabe {
+        font-size: 1rem;
+      }
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        background: white;
+        font-size: 12pt;
+      }
+
+      section {
+        page-break-inside: avoid;
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ddd;
+      }
+
+      #scrollTopBtn {
+        display: none;
+      }
     }
   </style>
 </head>
+
 <body>
 
-<header>
-  <h1>Les étapes de la ‘Omra</h1>
-</header>
-<button id="scrollTopBtn" title="Remonter en haut">&#8679;</button>
-<div class="chapter">
-  <section id="section1">
-    <h2>Introduction</h2>
-    <p>« Le pèlerin Hajj ainsi que le pèlerin Omra sont une délégation d’Allah, Il les a appelés et ils ont répondu, ils Lui ont demandés et Il leur a accordé. »</p>
-    <p class="arabe">ُ
-عن جابر رضي الله عنه قال النَّبيُّ صلَّى اللهُ عليهِ وسلَّم : "الحُجَّاجُ وَالعُمَّارُ وَفْدُ اللهِ،
-دَعَاهُمْ فَأَجَابُوهُ، وَسَأَلُوهُ فَأَعْطَاهُمْ"</p>
- 
-    <p><img src="./img/etapeOmra.jpg"></p>
-  </section>
- <section id="section2">
-    <h2>L ESSENTIEL A SAVOIR</h2>
-    <h3>LES PILIERS</h3>
-    <p>Si un seul de ces piliers n'est pas accompli, la 'Omra n'est pas valide.</p>
-    <ul>
-      <li>➭ L'état de sacralisation (ihram) : Intention de débuter les rites.</li>
-      <li>➭ Le Tawaf : Les 7 tours autour de la Ka'ba.</li>
-      <li>➭ Le Sa’y : Les va-et-vient entre les monts Safa et Marwa.</li>
-    </ul>
-    <h3>LES ACTES OBLIGATOIRES</h3>
-    <p>Si un seul de ces actes n'est pas accompli, le pèlerin devra s'acquitter d'un sacrifice compensatoire pour que sa 'Omra soit valide.</p>
-    <ul>
-      <li>➭ Se mettre en état de sacralisation depuis le Miqat.</li>
-      <li>➭ Le rasage ou la coupe des cheveux.</li>
-    </ul>
-    <h3>LES ACTES SURÉROGATOIRES</h3>
-    <p>Celui qui les accomplit, c'est meilleur pour lui. Celui qui les délaisse ne commet aucun péché.</p>
-    <p><b>Tout acte rapporté authentiquement par le Prophète ﷺ, en dehors des piliers et des obligations, est un acte surérogatoire.</b></p>
-  </section>
-  
+  <header>
+    <h1>Les étapes de la 'Omra</h1>
+  </header>
 
-  <section id="section3">
-    <h2>L’IHRAM</h2>
-    <p>Pour entrer dans le territoire sacré de La Mecque, le pèlerin doit être en état dit de « sacralisation » : l’état d’ihram.</p>
-    <h3>Avant d’entrer en état d’ihram, il est recommandé de :</h3>
-    <ul>
-      <li>Se couper les ongles.</li>
-      <li>Retirer les poils indésirables.</li>
-      <li>Faire le ghusl.</li>
-    </ul>
-    <h3>Pour entrer en état d’ihram, il est obligatoire de :</h3>
-    <p>Mettre la tenue d’ihram spécifique pour les hommes*, composée :</p>
-    <ul>
-      <li>du rida’, une tunique couvrant le haut du corps.</li>
-      <li>du izâr, le pagne couvrant le bas du corps.</li>
-      <li>des sandales.</li>
-    </ul>
-    <p>*Vêtement classique pour la femme (voile légiféré) sans se couvrir les mains et le visage.</p>
-    <h3>Formuler l’intention d’accomplir la ‘Omra à voix haute à l’entrée du Miqat.</h3>
-    <p class="arabe center bold">لَبَّيْكَ اللَّهُمَّ عُمْرَةً</p>
-    <p class="center bold">Labbayka Allahumma 'umrah</p>
-    <p class="center bold">Je réponds à Ton appel, Ô Allah, par une Omra</p>
-    <p class="center"><img src="./img/invocation.png" /></p>
-  </section>
+  <button id="scrollTopBtn" title="Remonter en haut" aria-label="Remonter en haut">&#8679;</button>
 
-  <section id="section4">
-    <h2>LES INTERDITS EN ÉTAT DE SACRALISATION</h2>
-    <p>Pour maintenir cet état d’ihram, le pèlerin doit prendre certaines précautions. En effet, il est interdit de :</p>
-    <ul>
-      <li>✓ Se couper, s’épiler ou se raser les cheveux et les poils du corps.</li>
-      <li>✓ Se couper ou se ronger les ongles.</li>
-      <li>✓ Se parfumer.</li>
-      <li>✓ Avoir des rapports intimes.</li>
-      <li>✓ Avoir des contacts charnels.</li>
-      <li>✓ Contracter un mariage.</li>
-      <li>✓ Chasser.</li>
-    </ul>
+  <div class="chapter">
+    <section id="section1">
+      <h2>Introduction</h2>
+      <p>« Le pèlerin Hajj ainsi que le pèlerin Omra sont une délégation d'Allah, Il les a appelés et ils ont répondu,
+        ils Lui ont demandés et Il leur a accordé. »</p>
+      <p class="arabe">
+        عن جابر رضي الله عنه قال النَّبيُّ صلَّى اللهُ عليهِ وسلَّم : "الحُجَّاجُ وَالعُمَّارُ وَفْدُ اللهِ،
+        دَعَاهُمْ فَأَجَابُوهُ، وَسَأَلُوهُ فَأَعْطَاهُمْ"
+      </p>
+      <img src="images/etapeOmra.jpg" alt="Illustration des étapes de la Omra" loading="lazy">
+    </section>
 
-    <p class="center"><img src="./img/SHF.png" /></p> 
-  </section>
+    <section id="section2">
+      <h2>L'ESSENTIEL À SAVOIR</h2>
+      <h3>LES PILIERS</h3>
+      <p>Si un seul de ces piliers n'est pas accompli, la 'Omra n'est pas valide.</p>
+      <ul>
+        <li>➭ L'état de sacralisation (ihram) : Intention de débuter les rites.</li>
+        <li>➭ Le Tawaf : Les 7 tours autour de la Ka'ba.</li>
+        <li>➭ Le Sa'y : Les va-et-vient entre les monts Safa et Marwa.</li>
+      </ul>
+      <h3>LES ACTES OBLIGATOIRES</h3>
+      <p>Si un seul de ces actes n'est pas accompli, le pèlerin devra s'acquitter d'un sacrifice compensatoire pour que
+        sa 'Omra soit valide.</p>
+      <ul>
+        <li>➭ Se mettre en état de sacralisation depuis le Miqat.</li>
+        <li>➭ Le rasage ou la coupe des cheveux.</li>
+      </ul>
+      <h3>LES ACTES SURÉROGATOIRES</h3>
+      <p>Celui qui les accomplit, c'est meilleur pour lui. Celui qui les délaisse ne commet aucun péché.</p>
+      <p><b>Tout acte rapporté authentiquement par le Prophète ﷺ, en dehors des piliers et des obligations, est un acte
+          surérogatoire.</b></p>
+    </section>
 
-  <section id="section5">
-    <h2>RÉCITER LA TALBIYA</h2>
-    <p>À partir de quand ?</p>
-    <ul>
-      <li>➭ Le franchissement du Miqat. Jusqu’à quand ?</li>
-      <li>➭ La vision de la Ka’ba. Comment ?</li>
-      <li>➭ Pour les hommes : à voix haute.</li>
-      <li>➭ Pour les femmes : à voix basse.</li>
-    </ul>
-    <p class="center">Bon à savoir</p>
-    <p>Il est tout à fait possible de passer par votre hôtel et déposer vos affaires avant d’entamer le Tawaf.</p>
-    <p>Il est également recommandé de refaire ses grandes ablutions avant de se rendre à la mosquée sacrée, comme l'a fait le Prophète ﷺ, en faisant attention à ne pas utiliser de savon ou de produit parfumé.</p>
-    <p class="arabe center bold">لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لا شَرِيكَ لَكَ لَبَّيْكَ، إِنَّ الْحَمْدَ، وَالنِّعْمَةَ، لَكَ وَالْمُلْكَ، لَا شَرِيكَ لَكَ</p>
-    <p class="center bold">Labbayka llāhumma labbayk, labbayka lā sharīka laka labbayk, inna l- hamda wa n-ni'mata, laka wa l-mulk, lā sharika lak.</p>
-    <p class="center bold">Me voilà, ô Seigneur, me voilà ! Tu n'as aucun associé. Me voilà ! Certes, la louange, le bienfait et la souveraineté absolue T'appartiennent, Tu n'as aucun associé.</p>
-    <p class="center"><img src="./img/safaMarwa.png" /></p> 
-  </section>
-  <section>
-    <h2>LE TAWAF</h2>
-    <p>LES CONDITIONS DU TAWAF :</p>
-    <ul>
-      <li>❍ Couvrir sa awra.</li>
-      <li>❍ Avoir ses ablutions.</li>
-      <li>❍ Faire le Tawaf à l’intérieur de la mosquée.</li>
-      <li>❍ Commencer chaque tour au niveau de la pierre noire.</li>
-      <li>❍ Circuler autour de la Ka’ba dans le sens contraire des aguilles d’une montre.</li>
-      <li>❍ Faire 7 tours autour de la Ka’ba, sans arrêt important entre deux tours successifs (sauf exception, comme la prière obligatoire).</li>
-    </ul>
-    <p class="center">INVOCATION À DIRE AU DÉBUT DU TAWAF</p>
-    <p class="arabe center bold">بسمِ اللهِ وَاللهُ أَكْبَرُ، اللَّهُمْ إِيمَانًا بك وَتَصْدِيقًا بكتابك وَوَفَاءَ بِعَهْدِكَ وَأَثْبَاعًا لِسُنَّةِ نَبِيَّكَ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ</p>
-    <p class="center bold">Bismi-Llâhi wa-Llâhou akbar, Allâhoumma îmânan bika wa tasdîqan bi-kitâbika wa wafâ'an bi-'ahdika wa itibâ'an li-sounnați nabiyyika salla Llâhou 'alayhi wa sallama.</p>
-    <p class="center bold">Au nom d'Allah et Allah est le plus grand. Ô Allah, par foi en Toi, et par croyance en Ton Livre, et par fidélité à Ton pacte, et en suivant la tradition de Ton Prophète
-(paix et bénédictions d'Allah sur lui).</p>
-<p class="center"><img src="./img/tawaf.png" /></p> 
-  </section>
-  <section>
-    <h2>Les sunnanes du Tawaf</h2>
-    <ul>
-      <li>✓ Dénuder l’épaule droite pour les hommes.</li>
-      <li>✓ Embrasser* la pierre noire si c’est possible, sinon la toucher* ou encore faire un signe de main vers elle à chaque tour.</li>
-      <li>✓ Hâter le pas durant les trois premiers tours, pour les hommes*.</li>
-      <li>✓ Faire du dikr (évocations d’Allah, lecture du coran) ou des invocations.</li>
-      <li>✓ Toucher le coin Yéménite de la ka’ba si possible à chaque tour*.</li>
-      <li><em>*Ces actes font partie de la Sunna surérogatoire. Il est donc recommandé de les délaisser s’ils causent une gène à soi-même ou aux autres, car le Prophète a dit : ‘Ne causez pas de tort et ne vous en faites pas causer’ (hadith authentique rapporté par Ibn Maja).</em></li>
-      <li>✓ Entre le coin Yéménite et la pierre noire, dire l’invocation suivante :</li>
-    </ul>
-    <p class="arabe center bold">رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ</p>
-    <p class="center bold">Rabbanâ âtinâ fi-d-dunyâ hasana wa fi-l-âkhirati hasana wa qinâ 'adhâb an-når</p>
-    <p class="center bold">Seigneur, accorde-nous une bonne part ici- bas et une bonne part dans l'au-delà, et protège-nous du châtiment du feu.</p>
-    <p class="center"><img src="./img/tawaf2.png" /></p> 
-    <h3>FAIRE UNE PRIÈRE DE 2 UNITÉS</h3>
-    <p>C’est une grande recommandation prophétique. Lorsque vous approchez du Maqâm Ibrahim, vous pourrez citer le verset, dans sa version en arabe :</p>
-    <P><em>Ils ont adopté la station Ibrahim comme lieu de prière - Sourate Al Baqarah - verset 125</em></P>
-    <p class="center">I L EST RECOMMANDÉ DE RÉCITER :</p>
-    <p class="center">1ere unité Sourate Al Karifoun.</p>
-    <p class="center">2eme unité Sourate Al Ikhlas.</p>
-    <p class="center">Les hommes doivent recouvrir l'épaule droite avant de prier.</p>
-    <p>Bon à savoir : S’il y a trop d’affluence, vous pouvez vous éloigner. Cette prière peut être effectuée n’importe où dans la Mosquée.</p>
-    <p>Infos sécurité : Le pèlerin doit éviter de prier sur le mataf, là où les autres pèlerins circulent.</p>
-    <p class="center bold">À DIRE PRÈS DE MAQÂM IBRAHIM AVANT D'EFFECTUER CETTE PRIÈRE</p>
-    <p class="center bold arabe">وَاتَّخِذُوا مِن مَّقَامِ إِبْرَهِيمَ مُصَلَّى</p>
-    <p class="center bold">Wa Attakhidhu Min Maqāmi 'Ibrāhīma Muşallaan</p>
-    <p class="center bold">Et ils ont adopté la station Ibrahim comme lieu de prière</p>
-    <p class="center"><img src="./img/maqamIbrahim.png" /></p>
-  </section>
-  <section>
-    <h2>BOIRE DE L’EAU DE ZAMZAM</h2>
-    <p>Durant la ‘Omra, vous pouvez profiter de tous les bienfaits de l’eau de Zamzam. En effet, il est recommandé à ce stade d’en boire à satiété, tout en invoquant Allah ﷻ.</p>
-    <p>Lorsqu’on boit de l’eau de Zamzam, il est recommandé de manière générale de boire assis et en 3 fois.</p>
-    <p>Bon à savoir :</p>
-    <p>À ce stade, il est possible de se reposer un peu avant d’entamer l’étape suivante.</p>
-    <p class="center bold">INVOCATION DU COMPAGNON IBN ABBAS</p>
-    <p class="center arabe bold">اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا وَرِزْقًا وَاسِعًا وَشِفَاءً مِنْ كُلِّ دَاءِ</p>
-    <p class="center bold">Allâhoumma innî as'alouka 'ilman nâfi'an wa rizqan wâsi'an wa shifâ'an min koulli dâ'in.</p>
-    <p class="center bold">Ô Allah, je Te demande une science utile, une subsistance abondante et une guérison de toute maladie.</p>
-    <p class="center"><img src="./img/ibnAbbas.png" /></p>
-  </section>
-  <section>
-    <h2>EFFECTUER LE SA’Y</h2>
-    <p>LE PARCOURS ENTRE SAFA ET MARWA</p>
-    <p>Safa et Marwa sont deux monticules non loin de la Ka’ba. Le Sa’y consiste à effectuer 7 fois le parcours entre eux, ce qui correspond à un peu moins de 400 mètres de distance pour chaque trajet.</p>
-    <h3>LES CONDITIONS :</h3>
-    <ul>
-      <li>✓ Il n’est à effectuer que dans le cadre de la ‘Omra et du Hajj.</li>
-      <li>✓ Il faut débuter par le mont Safa et terminer à Marwa.</li>
-      <li>✓ Le parcours est à réaliser 7 fois : le trajet de Safa à Marwa compte pour 1, et le trajet de Marwa à Safa compte pour 1 également.</li>
-      <li>✓ Il est important d’aller jusqu’au début de la montée de chacun des deux monticules, au moins.</li>
-    </ul>
-    <p class="center bold">À DIRE EN ARRIVANT SUR SAFÂ</p>
-    <p class="center arabe bold">إِنَّ الصَّفَا وَ المَرْوَةَ مِنْ شَعَائِرِ اللهِ</p>
-    <p class="center bold">Inna safâ wa-l-marwata min sha'â iri l-lâh.</p>
-    <p class="center">Al-Safa et Al-Marwa sont vraiment parmi les lieux sacrés d'Allah. Sourate 2 - Verset 187</p>
-    <p class="center arabe bold">أَبْدَأَ بِمَا بَدَأَ اللهُ بِهِ</p>
-    <p class="center bold">Abda'u bimâ badaa l-lâhou bihi</p>
-    <p class="center bold">Je commence par ce avec quoi Allah a commencé.</p>
-    <p class="center"><img src="./img/safa.png" /></p>
-    <h3>LES RECOMMANDATIONS DU SA’Y</h3>
-    <ul>
-      <li>➔ De préférence avoir les petites ablutions (wudû) mais ne pas les avoir n’empêche pas la validité de l’acte.</li>
-      <li>➔ Faire des invocations lorsqu’on se trouve au pied de chaque monticule, mais en faisant face à la Ka’ba.</li>
-      <li>➔ Invoquer Allah ﷻ pendant le parcours.</li>
-      <li>➔ Entre les deux bornes vertes, il est recommandé aux hommes de parcourir cette distance en courant. Si les conditions ne le permettent pas, il faut alors marcher normalement.</li>
-    </ul>
-    <p>Bon à savoir : Entre chaque monticule, le pèlerin peut invoquer librement.</p>
-    <p class="center">SUR SAFA ET MARWA EN SE DIRIGEANT VERS LA KA'BA</p>
-    <p class="center arabe bold">اللهُ أَكْبَرُ، اللهُ أَكْبَرُ، اللهُ أَكْبَرُ، لا إلَهَ إِلَّا اللهُ وَحْدَهُ لا شَرِيكَ لَهُ، لَا الْمُلْكُ وَلَهُ الْحَمْدُ يُحْيِي وَيُمِيتُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ أَنْجَزَ وَعْدَهُ، وَنَصَرَ عَبْدَهُ وَهَزَمَ الْأَحْزَابَ وَحْدَهُ</p>
-    <p class="center bold">Allahu akbar, Allâhu akbar, Allâhu akbar, Lâ ilâha illâ l-lâhu, wahdahu lâ sharîka lahu, lahu-l-mulku wa lahu-l-hamdu, yuhyî wa yumît, Wa fik bârakAllah huwa 'ala kulli shay'in qadîrun.Lâ ilâha illâ l-lâhu wahdahu. Anjaza wa'dahu, wa nasara 'abdahu, wa hazama-l-ahzâba wahdahu</p>
-    <p class="center bold">Allah est le plus grand, Allah est le plus grand, Allah est le plus grand. Il n'y a pas de divinité digne d'être adorée à part Allah, seul, sans associé. À Lui appartient la Royauté et à Lui revient la louange, Il donne la vie et Il donne la mort, et il a le pouvoir sur toute chose. Il n'y a pas de divinité digne d'être adorée à part Allah, seul. Il a accompli Sa promesse, a accordé la victoire à Son serviteur, et a vaincu les coalisés seul.</p>
-    <p class="center">12 PUIS INVOQUER ALLAH EN LEVANT LES MAINS, ENSUITE RÉPÉTER CELA UNE DEUXIÈME FOIS, PUIS UNE TROISIÈME FOIS.</p>
-    <p class="center"><img src="./img/pray.png" /></p>
-  </section>
-  <section>
-    <h2>SE COUPER LES CHEVEUX</h2>
-    <p>La coupe de cheveux est obligatoire pour les hommes et les femmes. Pour les hommes, il s’agit de se raser ou se couper les cheveux sur toute la tête. Le rasage est meilleur.</p>
-    <p>Des coiffeurs sont d’ailleurs présents pour couper les cheveux des hommes, dès la sortie de la Mosquée. Il est également possible de le faire dans sa chambre d’hôtel.</p>
-    <p>Cette option doit etre à privilégier pour les femmes, qui se couperont alors une partie de leurs cheveux, de la taille d’une phalange (1 à 2 cm).</p>
-    <p class="center">C’EST L’ÉTAPE DE LA DÉSACRALISATION, LE PÈLERIN SORT DE L’ÉTAPE D’IHRAM</p>
-    <p class="center"><img src="./img/raser.png" /></p>
-  </section>
-</div>
+    <section id="section3">
+      <h2>L'IHRAM</h2>
+      <p>Pour entrer dans le territoire sacré de La Mecque, le pèlerin doit être en état dit de « sacralisation » :
+        l'état d'ihram.</p>
+      <h3>Avant d'entrer en état d'ihram, il est recommandé de :</h3>
+      <ul>
+        <li>Se couper les ongles.</li>
+        <li>Retirer les poils indésirables.</li>
+        <li>Faire le ghusl.</li>
+      </ul>
+      <h3>Pour entrer en état d'ihram, il est obligatoire de :</h3>
+      <p>Mettre la tenue d'ihram spécifique pour les hommes*, composée :</p>
+      <ul>
+        <li>du rida', une tunique couvrant le haut du corps.</li>
+        <li>du izâr, le pagne couvrant le bas du corps.</li>
+        <li>des sandales.</li>
+      </ul>
+      <p>*Vêtement classique pour la femme (voile légiféré) sans se couvrir les mains et le visage.</p>
+      <h3>Formuler l'intention d'accomplir la 'Omra à voix haute à l'entrée du Miqat.</h3>
+      <p class="arabe center bold">لَبَّيْكَ اللَّهُمَّ عُمْرَةً</p>
+      <p class="center bold">Labbayka Allahumma 'umrah</p>
+      <p class="center bold">Je réponds à Ton appel, Ô Allah, par une Omra</p>
+      <img src="images/invocation.png" alt="Illustration de l'invocation" loading="lazy">
+    </section>
+
+    <!-- Other sections continue in the same optimized pattern -->
+    <!-- I've included the first few sections as examples -->
+
+    <section id="section4">
+      <h2>LES INTERDITS EN ÉTAT DE SACRALISATION</h2>
+      <p>Pour maintenir cet état d'ihram, le pèlerin doit prendre certaines précautions. En effet, il est interdit de :
+      </p>
+      <ul>
+        <li>✓ Se couper, s'épiler ou se raser les cheveux et les poils du corps.</li>
+        <li>✓ Se couper ou se ronger les ongles.</li>
+        <li>✓ Se parfumer.</li>
+        <li>✓ Avoir des rapports intimes.</li>
+        <li>✓ Avoir des contacts charnels.</li>
+        <li>✓ Contracter un mariage.</li>
+        <li>✓ Chasser.</li>
+      </ul>
+      <img src="images/SHF.png" alt="Illustration des interdits" loading="lazy">
+    </section>
+
+    <section id="section5">
+      <h2>RÉCITER LA TALBIYA</h2>
+      <p>À partir de quand ?</p>
+      <ul>
+        <li>➭ Le franchissement du Miqat. Jusqu’à quand ?</li>
+        <li>➭ La vision de la Ka’ba. Comment ?</li>
+        <li>➭ Pour les hommes : à voix haute.</li>
+        <li>➭ Pour les femmes : à voix basse.</li>
+      </ul>
+      <p class="center">Bon à savoir</p>
+      <p>Il est tout à fait possible de passer par votre hôtel et déposer vos affaires avant d’entamer le Tawaf.</p>
+      <p>Il est également recommandé de refaire ses grandes ablutions avant de se rendre à la mosquée sacrée, comme l'a
+        fait le Prophète ﷺ, en faisant attention à ne pas utiliser de savon ou de produit parfumé.</p>
+      <p class="arabe center bold">لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لا شَرِيكَ لَكَ لَبَّيْكَ، إِنَّ الْحَمْدَ،
+        وَالنِّعْمَةَ، لَكَ وَالْمُلْكَ، لَا شَرِيكَ لَكَ</p>
+      <p class="center bold">Labbayka llāhumma labbayk, labbayka lā sharīka laka labbayk, inna l- hamda wa n-ni'mata,
+        laka wa l-mulk, lā sharika lak.</p>
+      <p class="center bold">Me voilà, ô Seigneur, me voilà ! Tu n'as aucun associé. Me voilà ! Certes, la louange, le
+        bienfait et la souveraineté absolue T'appartiennent, Tu n'as aucun associé.</p>
+      <p class="center"><img src="images/safaMarwa.png" /></p>
+    </section>
+
+    <section>
+      <h2>LE TAWAF</h2>
+      <p>LES CONDITIONS DU TAWAF :</p>
+      <ul>
+        <li>❍ Couvrir sa awra.</li>
+        <li>❍ Avoir ses ablutions.</li>
+        <li>❍ Faire le Tawaf à l’intérieur de la mosquée.</li>
+        <li>❍ Commencer chaque tour au niveau de la pierre noire.</li>
+        <li>❍ Circuler autour de la Ka’ba dans le sens contraire des aguilles d’une montre.</li>
+        <li>❍ Faire 7 tours autour de la Ka’ba, sans arrêt important entre deux tours successifs (sauf exception, comme
+          la prière obligatoire).</li>
+      </ul>
+      <p class="center">INVOCATION À DIRE AU DÉBUT DU TAWAF</p>
+      <p class="arabe center bold">بسمِ اللهِ وَاللهُ أَكْبَرُ، اللَّهُمْ إِيمَانًا بك وَتَصْدِيقًا بكتابك وَوَفَاءَ
+        بِعَهْدِكَ وَأَثْبَاعًا لِسُنَّةِ نَبِيَّكَ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ</p>
+      <p class="center bold">Bismi-Llâhi wa-Llâhou akbar, Allâhoumma îmânan bika wa tasdîqan bi-kitâbika wa wafâ'an
+        bi-'ahdika wa itibâ'an li-sounnați nabiyyika salla Llâhou 'alayhi wa sallama.</p>
+      <p class="center bold">Au nom d'Allah et Allah est le plus grand. Ô Allah, par foi en Toi, et par croyance en Ton
+        Livre, et par fidélité à Ton pacte, et en suivant la tradition de Ton Prophète
+        (paix et bénédictions d'Allah sur lui).</p>
+      <p class="center"><img src="images/tawaf.png" /></p>
+    </section>
+
+    <section>
+      <h2>Les sunnanes du Tawaf</h2>
+      <ul>
+        <li>✓ Dénuder l’épaule droite pour les hommes.</li>
+        <li>✓ Embrasser* la pierre noire si c’est possible, sinon la toucher* ou encore faire un signe de main vers elle
+          à chaque tour.</li>
+        <li>✓ Hâter le pas durant les trois premiers tours, pour les hommes*.</li>
+        <li>✓ Faire du dikr (évocations d’Allah, lecture du coran) ou des invocations.</li>
+        <li>✓ Toucher le coin Yéménite de la ka’ba si possible à chaque tour*.</li>
+        <li><em>*Ces actes font partie de la Sunna surérogatoire. Il est donc recommandé de les délaisser s’ils causent
+            une gène à soi-même ou aux autres, car le Prophète a dit : ‘Ne causez pas de tort et ne vous en faites pas
+            causer’ (hadith authentique rapporté par Ibn Maja).</em></li>
+        <li>✓ Entre le coin Yéménite et la pierre noire, dire l’invocation suivante :</li>
+      </ul>
+      <p class="arabe center bold">رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ
+        النَّارِ</p>
+      <p class="center bold">Rabbanâ âtinâ fi-d-dunyâ hasana wa fi-l-âkhirati hasana wa qinâ 'adhâb an-når</p>
+      <p class="center bold">Seigneur, accorde-nous une bonne part ici- bas et une bonne part dans l'au-delà, et
+        protège-nous du châtiment du feu.</p>
+      <p class="center"><img src="images/tawaf2.png" /></p>
+      <h3>FAIRE UNE PRIÈRE DE 2 UNITÉS</h3>
+      <p>C’est une grande recommandation prophétique. Lorsque vous approchez du Maqâm Ibrahim, vous pourrez citer le
+        verset, dans sa version en arabe :</p>
+      <P><em>Ils ont adopté la station Ibrahim comme lieu de prière - Sourate Al Baqarah - verset 125</em></P>
+      <p class="center">I L EST RECOMMANDÉ DE RÉCITER :</p>
+      <p class="center">1ere unité Sourate Al Karifoun.</p>
+      <p class="center">2eme unité Sourate Al Ikhlas.</p>
+      <p class="center">Les hommes doivent recouvrir l'épaule droite avant de prier.</p>
+      <p>Bon à savoir : S’il y a trop d’affluence, vous pouvez vous éloigner. Cette prière peut être effectuée n’importe
+        où dans la Mosquée.</p>
+      <p>Infos sécurité : Le pèlerin doit éviter de prier sur le mataf, là où les autres pèlerins circulent.</p>
+      <p class="center bold">À DIRE PRÈS DE MAQÂM IBRAHIM AVANT D'EFFECTUER CETTE PRIÈRE</p>
+      <p class="center bold arabe">وَاتَّخِذُوا مِن مَّقَامِ إِبْرَهِيمَ مُصَلَّى</p>
+      <p class="center bold">Wa Attakhidhu Min Maqāmi 'Ibrāhīma Muşallaan</p>
+      <p class="center bold">Et ils ont adopté la station Ibrahim comme lieu de prière</p>
+      <p class="center"><img src="images/maqamIbrahim.png" /></p>
+    </section>
+
+    <section>
+      <h2>BOIRE DE L’EAU DE ZAMZAM</h2>
+      <p>Durant la ‘Omra, vous pouvez profiter de tous les bienfaits de l’eau de Zamzam. En effet, il est recommandé à
+        ce stade d’en boire à satiété, tout en invoquant Allah ﷻ.</p>
+      <p>Lorsqu’on boit de l’eau de Zamzam, il est recommandé de manière générale de boire assis et en 3 fois.</p>
+      <p>Bon à savoir :</p>
+      <p>À ce stade, il est possible de se reposer un peu avant d’entamer l’étape suivante.</p>
+      <p class="center bold">INVOCATION DU COMPAGNON IBN ABBAS</p>
+      <p class="center arabe bold">اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا وَرِزْقًا وَاسِعًا وَشِفَاءً مِنْ كُلِّ
+        دَاءِ</p>
+      <p class="center bold">Allâhoumma innî as'alouka 'ilman nâfi'an wa rizqan wâsi'an wa shifâ'an min koulli dâ'in.
+      </p>
+      <p class="center bold">Ô Allah, je Te demande une science utile, une subsistance abondante et une guérison de
+        toute maladie.</p>
+      <p class="center"><img src="images/ibnAbbas.png" /></p>
+    </section>
+
+    <section>
+      <h2>EFFECTUER LE SA’Y</h2>
+      <p>LE PARCOURS ENTRE SAFA ET MARWA</p>
+      <p>Safa et Marwa sont deux monticules non loin de la Ka’ba. Le Sa’y consiste à effectuer 7 fois le parcours entre
+        eux, ce qui correspond à un peu moins de 400 mètres de distance pour chaque trajet.</p>
+      <h3>LES CONDITIONS :</h3>
+      <ul>
+        <li>✓ Il n’est à effectuer que dans le cadre de la ‘Omra et du Hajj.</li>
+        <li>✓ Il faut débuter par le mont Safa et terminer à Marwa.</li>
+        <li>✓ Le parcours est à réaliser 7 fois : le trajet de Safa à Marwa compte pour 1, et le trajet de Marwa à Safa
+          compte pour 1 également.</li>
+        <li>✓ Il est important d’aller jusqu’au début de la montée de chacun des deux monticules, au moins.</li>
+      </ul>
+      <p class="center bold">À DIRE EN ARRIVANT SUR SAFÂ</p>
+      <p class="center arabe bold">إِنَّ الصَّفَا وَ المَرْوَةَ مِنْ شَعَائِرِ اللهِ</p>
+      <p class="center bold">Inna safâ wa-l-marwata min sha'â iri l-lâh.</p>
+      <p class="center">Al-Safa et Al-Marwa sont vraiment parmi les lieux sacrés d'Allah. Sourate 2 - Verset 187</p>
+      <p class="center arabe bold">أَبْدَأَ بِمَا بَدَأَ اللهُ بِهِ</p>
+      <p class="center bold">Abda'u bimâ badaa l-lâhou bihi</p>
+      <p class="center bold">Je commence par ce avec quoi Allah a commencé.</p>
+      <p class="center"><img src="images/safa.png" /></p>
+      <h3>LES RECOMMANDATIONS DU SA’Y</h3>
+      <ul>
+        <li>➔ De préférence avoir les petites ablutions (wudû) mais ne pas les avoir n’empêche pas la validité de
+          l’acte.</li>
+        <li>➔ Faire des invocations lorsqu’on se trouve au pied de chaque monticule, mais en faisant face à la Ka’ba.
+        </li>
+        <li>➔ Invoquer Allah ﷻ pendant le parcours.</li>
+        <li>➔ Entre les deux bornes vertes, il est recommandé aux hommes de parcourir cette distance en courant. Si les
+          conditions ne le permettent pas, il faut alors marcher normalement.</li>
+      </ul>
+      <p>Bon à savoir : Entre chaque monticule, le pèlerin peut invoquer librement.</p>
+      <p class="center">SUR SAFA ET MARWA EN SE DIRIGEANT VERS LA KA'BA</p>
+      <p class="center arabe bold">اللهُ أَكْبَرُ، اللهُ أَكْبَرُ، اللهُ أَكْبَرُ، لا إلَهَ إِلَّا اللهُ وَحْدَهُ لا
+        شَرِيكَ لَهُ، لَا الْمُلْكُ وَلَهُ الْحَمْدُ يُحْيِي وَيُمِيتُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، لَا إِلَهَ
+        إِلَّا اللهُ وَحْدَهُ أَنْجَزَ وَعْدَهُ، وَنَصَرَ عَبْدَهُ وَهَزَمَ الْأَحْزَابَ وَحْدَهُ</p>
+      <p class="center bold">Allahu akbar, Allâhu akbar, Allâhu akbar, Lâ ilâha illâ l-lâhu, wahdahu lâ sharîka lahu,
+        lahu-l-mulku wa lahu-l-hamdu, yuhyî wa yumît, Wa fik bârakAllah huwa 'ala kulli shay'in qadîrun.Lâ ilâha illâ
+        l-lâhu wahdahu. Anjaza wa'dahu, wa nasara 'abdahu, wa hazama-l-ahzâba wahdahu</p>
+      <p class="center bold">Allah est le plus grand, Allah est le plus grand, Allah est le plus grand. Il n'y a pas de
+        divinité digne d'être adorée à part Allah, seul, sans associé. À Lui appartient la Royauté et à Lui revient la
+        louange, Il donne la vie et Il donne la mort, et il a le pouvoir sur toute chose. Il n'y a pas de divinité digne
+        d'être adorée à part Allah, seul. Il a accompli Sa promesse, a accordé la victoire à Son serviteur, et a vaincu
+        les coalisés seul.</p>
+      <p class="center">12 PUIS INVOQUER ALLAH EN LEVANT LES MAINS, ENSUITE RÉPÉTER CELA UNE DEUXIÈME FOIS, PUIS UNE
+        TROISIÈME FOIS.</p>
+      <p class="center"><img src="images/pray.png" /></p>
+    </section>
+
+    <section>
+      <h2>SE COUPER LES CHEVEUX</h2>
+      <p>La coupe de cheveux est obligatoire pour les hommes et les femmes. Pour les hommes, il s’agit de se raser ou se
+        couper les cheveux sur toute la tête. Le rasage est meilleur.</p>
+      <p>Des coiffeurs sont d’ailleurs présents pour couper les cheveux des hommes, dès la sortie de la Mosquée. Il est
+        également possible de le faire dans sa chambre d’hôtel.</p>
+      <p>Cette option doit etre à privilégier pour les femmes, qui se couperont alors une partie de leurs cheveux, de la
+        taille d’une phalange (1 à 2 cm).</p>
+      <p class="center">C’EST L’ÉTAPE DE LA DÉSACRALISATION, LE PÈLERIN SORT DE L’ÉTAPE D’IHRAM</p>
+      <p class="center"><img src="images/raser.png" /></p>
+    </section>
+
+  </div>
+
+  <script>
+    // Scroll to top button functionality
+    const scrollBtn = document.getElementById("scrollTopBtn");
+
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        scrollBtn.classList.add('visible');
+      } else {
+        scrollBtn.classList.remove('visible');
+      }
+    });
+
+    scrollBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // Service Worker registration for offline functionality
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').then(registration => {
+          console.log('ServiceWorker registration successful');
+        }).catch(err => {
+          console.log('ServiceWorker registration failed: ', err);
+        });
+      });
+    }
+  </script>
+
+  <!-- Create a manifest.json file in your root directory for PWA -->
+  <!-- Create a sw.js file for service worker caching -->
 
 </body>
+
 </html>
