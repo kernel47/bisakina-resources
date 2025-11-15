@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos Engagements</title>
+    <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css"
+/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            padding: 20px;
+            color: #333;
+            max-width: 100%;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, #1987b7, #4194b8);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+        
+        h1 {
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .mission-section {
+            background-color: #fff;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+        
+        .section-header {
+            padding: 20px;
+            background-color: #1987b7;
+            color: white;
+            font-weight: bold;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .section-header i {
+            margin-right: 12px;
+            font-size: 1.5rem;
+        }
+        
+        .mission-content {
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .mission-text {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .mission-highlight {
+            background: linear-gradient(135deg, #1987b7, #4194b8);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        .commitments-section {
+            background-color: #fff;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+        
+        .commitments-content {
+            padding: 30px;
+        }
+        
+        .commitments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .commitment-card {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            border-left: 5px solid #1987b7;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .commitment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .commitment-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #1987b7;
+            text-align: center;
+        }
+        
+        .commitment-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+        
+        .commitment-description {
+            color: #555;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+        
+        .vision-section {
+            background-color: #fff;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+        
+        .vision-content {
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .vision-text {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto 20px;
+            font-style: italic;
+        }
+        
+        .prayer-section {
+            background: linear-gradient(135deg, #1987b7, #2c3e50);
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+        
+        .prayer-content {
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+        
+        .prayer-text {
+            font-size: 1.3rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        .prayer-arabic {
+            font-size: 2rem;
+            margin-top: 20px;
+            font-weight: bold;
+            font-family: 'Traditional Arabic', 'Times New Roman', serif;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            header {
+                padding: 20px 15px;
+            }
+            
+            h1 {
+                font-size: 1.6rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .mission-content, .commitments-content, .vision-content, .prayer-content {
+                padding: 20px;
+            }
+            
+            .commitments-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .mission-highlight {
+                font-size: 1.1rem;
+                padding: 20px;
+            }
+            
+            .prayer-text {
+                font-size: 1.1rem;
+            }
+            
+            .prayer-arabic {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-hands-helping"></i> Nos Engagements</h1>
+        <p class="subtitle">Une mission commune au service d'Allah (سبحانه وتعالى)</p>
+    </header>
+    
+    <div class="mission-section">
+        <div class="section-header">
+            <i class="fas fa-users"></i>
+            Une promesse partagée
+        </div>
+        <div class="mission-content">
+            <p class="mission-text">
+                En tant que fondateurs et prestataires – qu’ils soient guides, accompagnateurs, artisans ou acteurs du terrain – nous formons une communauté unie par la foi, au service des visiteurs et pèlerins qui foulent la terre bénie d’Arabie Saoudite. 
+            </p>
+            
+            <div class="mission-highlight">
+                Ensemble, nous portons la responsabilité de faire vivre une expérience qui allie spiritualité, respect, transmission et excellence.
+            </div>
+            
+            <p class="mission-text">
+                Ainsi, chaque prestataire s'engage à respecter notre charte, construite autour de 7 engagements.
+
+            </p>
+        </div>
+    </div>
+    
+    <div class="commitments-section">
+        <div class="section-header">
+            <i class="fas fa-handshake"></i>
+            Nos 7 Engagements
+        </div>
+        <div class="commitments-content">
+            <div class="commitments-grid">
+                <div class="commitment-card">
+                    <div class="commitment-icon">🤲</div>
+                    <div class="commitment-title">SINCERITE</div>
+                    <div class="commitment-description">
+                        Servir avec sincérité pour l’amour d’Allah, en étant animés par une intention pure et l’exemple de la Sunna du Prophète ﷺ.
+                    </div>
+                </div>
+                
+                <div class="commitment-card">
+                    <div class="commitment-icon">💞</div>
+                    <div class="commitment-title">BIENVEILLANCE</div>
+                    <div class="commitment-description">
+                        Accueillir chaque visiteur – qu’il soit pèlerin ou non – avec respect, bienveillance, douceur et fraternité, sans distinction.
+                    </div>
+                </div>
+                
+                <div class="commitment-card">
+                    <div class="commitment-icon">📖</div>
+                    <div class="commitment-title">TRANSMISSION</div>
+                    <div class="commitment-description">
+                        Transmettre la connaissance des rites sacrés, de l’histoire islamique, et des richesses spirituelles de la terre sainte.
+
+                    </div>
+                </div>
+                
+                <div class="commitment-card">
+                    <div class="commitment-icon"><span class="fi fi-sa"></span></div>
+                    <div class="commitment-title">DECOUVERTE</div>
+                    <div class="commitment-description">
+                        Faire découvrir l’Arabie Saoudite dans sa profondeur humaine et spirituelle, en valorisant ses mœurs, sa culture, ses artisans et ses trésors cachés.
+
+                    </div>
+                </div>
+                
+                <div class="commitment-card">
+                    <div class="commitment-icon">⚖</div>
+                    <div class="commitment-title">RESPECT</div>
+                    <div class="commitment-description">
+                        Respecter les règles religieuses, les lois du pays hôte, et les codes de conduite propres à la terre des deux saintes mosquées.
+                    </div>
+                </div>
+                
+                <div class="commitment-card">
+                    <div class="commitment-icon">🛍️</div>
+                    <div class="commitment-title">AUTHENTICITE</div>
+                    <div class="commitment-description">
+                        Soutenir le tissu local en mettant en lumière les produits, traditions et savoir-faire qui témoignent de l’authenticité et de la richesse du territoire.
+                    </div>
+                </div>
+                
+                <div class="commitment-card">
+                    <div class="commitment-icon">🤝</div>
+                    <div class="commitment-title">RESPONSABILITE</div>
+                    <div class="commitment-description">
+                        Agir avec honnêteté, humilité et professionnalisme, en respectant les engagements pris envers les visiteurs, les partenaires et envers Allah.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="vision-section">
+        <div class="section-header">
+            🧭
+            Notre Vision
+        </div>
+        <div class="vision-content">
+            <p class="vision-text">
+                Honorer la terre d’Arabie en facilitant une découverte à la fois respectueuse, inspirante et enracinée dans la foi.
+            </p>
+        </div>
+    </div>
+    
+    <div class="prayer-section">
+        <div class="prayer-content">
+            <div class="prayer-text">
+               Qu’Allah accepte notre intention, purifie notre action, et fasse de chaque mission un acte d’adoration. 
+            </div>
+            <div class="prayer-arabic">آمين</div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2025 Bisakina. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        // Animation pour les cartes d'engagement
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.commitment-card');
+            
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+            
+            // Animation pour la section mission
+            const missionHighlight = document.querySelector('.mission-highlight');
+            missionHighlight.style.opacity = '0';
+            
+            setTimeout(() => {
+                missionHighlight.style.transition = 'opacity 0.8s ease';
+                missionHighlight.style.opacity = '1';
+            }, 500);
+        });
+    </script>
+</body>
+</html>

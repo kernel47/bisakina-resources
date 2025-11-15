@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numéros d'Urgence - Arabie Saoudite</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            padding: 20px;
+            color: #333;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, #1987b7, #4194b8);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+        
+        h1 {
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .emergency-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .section {
+            background-color: #fff;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+        
+        .section-header {
+            padding: 20px;
+            background-color: #1987b7;
+            color: white;
+            font-weight: bold;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-header i {
+            margin-right: 12px;
+            font-size: 1.5rem;
+        }
+        
+        .section-content {
+            padding: 25px;
+        }
+        
+        .emergency-item {
+            display: flex;
+            align-items: center;
+            padding: 18px 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            background-color: #f8f9fa;
+            transition: all 0.3s ease;
+            border-left: 5px solid #e74c3c;
+        }
+        
+        .emergency-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+        
+        .emergency-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            font-size: 1.8rem;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .emergency-details {
+            flex-grow: 1;
+        }
+        
+        .emergency-name {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+        
+        .emergency-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 5px;
+        }
+        
+        .emergency-description {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+        }
+        
+        .hajj-section .emergency-item {
+            border-left-color: #3498db;
+        }
+        
+        .hajj-section .emergency-number {
+            color: #3498db;
+        }
+        
+        .important-note {
+            background-color: #fff9e6;
+            border-left: 5px solid #f1c40f;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .important-note h3 {
+            color: #d35400;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .important-note h3 i {
+            margin-right: 10px;
+        }
+        
+        .important-note p {
+            line-height: 1.6;
+            color: #7f8c8d;
+        }
+        
+        .phone-link {
+            color: inherit;
+            text-decoration: none;
+            display: block;
+            padding: 5px 0;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            header {
+                padding: 20px 15px;
+            }
+            
+            h1 {
+                font-size: 1.6rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .section-content {
+                padding: 15px;
+            }
+            
+            .emergency-item {
+                padding: 15px 10px;
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .emergency-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+            
+            .emergency-number {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-phone-alt"></i> Numéros d'Urgence</h1>
+        <p class="subtitle">Arabie Saoudite - Services d'urgence disponibles 24h/24</p>
+    </header>
+    
+    <div class="emergency-container">
+        <div class="section">
+            <div class="section-header">
+                <i class="fas fa-exclamation-triangle"></i>
+                Services d'Urgence Principaux
+            </div>
+            <div class="section-content">
+                <div class="emergency-item">
+                    <div class="emergency-icon" style="background-color: #e74c3c;">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="emergency-details">
+                        <div class="emergency-name">Police</div>
+                        <a href="tel:999" class="emergency-number phone-link">999</a>
+                        <div class="emergency-description">Pour toute urgence liée à la sécurité publique</div>
+                    </div>
+                </div>
+                
+                <div class="emergency-item">
+                    <div class="emergency-icon" style="background-color: #3498db;">
+                        <i class="fas fa-ambulance"></i>
+                    </div>
+                    <div class="emergency-details">
+                        <div class="emergency-name">Ambulance</div>
+                        <a href="tel:997" class="emergency-number phone-link">997</a>
+                        <div class="emergency-description">Assistance médicale d'urgence et transport vers l'hôpital</div>
+                    </div>
+                </div>
+                
+                <div class="emergency-item">
+                    <div class="emergency-icon" style="background-color: #e67e22;">
+                        <i class="fas fa-fire-extinguisher"></i>
+                    </div>
+                    <div class="emergency-details">
+                        <div class="emergency-name">Pompiers</div>
+                        <a href="tel:998" class="emergency-number phone-link">998</a>
+                        <div class="emergency-description">Intervention en cas d'incendie et de sauvetage</div>
+                    </div>
+                </div>
+                
+                <div class="emergency-item">
+                    <div class="emergency-icon" style="background-color: #9b59b6;">
+                        <i class="fas fa-phone-volume"></i>
+                    </div>
+                    <div class="emergency-details">
+                        <div class="emergency-name">Centre d'appels d'urgence unifié</div>
+                        <a href="tel:911" class="emergency-number phone-link">911</a>
+                        <div class="emergency-description">Numéro unique pour police, ambulance et pompiers</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section hajj-section">
+            <div class="section-header">
+                <i class="fas fa-kaaba"></i>
+                Assistance pour le Hajj et la Omra
+            </div>
+            <div class="section-content">
+                <div class="emergency-item">
+                    <div class="emergency-icon" style="background-color: #16a085;">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <div class="emergency-details">
+                        <div class="emergency-name">Centre d'appui et assistance aux pèlerins</div>
+                        <a href="tel:8004477777" class="emergency-number phone-link">8004477777</a>
+                        <div class="emergency-description">Assistance générale pour les pèlerins du Hajj et de la Omra</div>
+                    </div>
+                </div>
+                
+                <div class="emergency-item">
+                    <div class="emergency-icon" style="background-color: #27ae60;">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="emergency-details">
+                        <div class="emergency-name">Ligne d'assistance générale pour le Hajj</div>
+                        <a href="tel:996" class="emergency-number phone-link">996</a>
+                        <div class="emergency-description">Informations et assistance générale pour le pèlerinage</div>
+                    </div>
+                </div>
+                
+                <div class="emergency-item">
+                    <div class="emergency-icon" style="background-color: #2980b9;">
+                        <i class="fas fa-first-aid"></i>
+                    </div>
+                    <div class="emergency-details">
+                        <div class="emergency-name">Assistance médicale pour les pèlerins</div>
+                        <a href="tel:937" class="emergency-number phone-link">937</a>
+                        <div class="emergency-description">Soins médicaux et assistance santé pour les pèlerins</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="important-note">
+            <h3><i class="fas fa-exclamation-circle"></i> Note importante</h3>
+            <p>Tous ces numéros sont accessibles gratuitement 24 heures sur 24 et 7 jours sur 7. En cas d'urgence, composez le numéro approprié et fournissez des informations claires sur votre situation et votre localisation. Pour les pèlerins, les services d'assistance Hajj et Omra sont particulièrement actifs pendant les périodes de pèlerinage.</p>
+        </div>
+    </div>
+
+    <script>
+        // Fonction pour formater les numéros de téléphone
+        function formatPhoneNumbers() {
+            document.querySelectorAll('.phone-link').forEach(link => {
+                // Nettoyer le numéro pour le lien tel:
+                const cleanNumber = link.getAttribute('href').replace(/\s/g, '');
+                link.setAttribute('href', 'tel:' + cleanNumber);
+            });
+        }
+        
+        // Ajouter des animations d'entrée
+        function animateItems() {
+            const items = document.querySelectorAll('.emergency-item');
+            items.forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+        }
+        
+        // Initialiser la page
+        document.addEventListener('DOMContentLoaded', () => {
+            formatPhoneNumbers();
+            animateItems();
+        });
+    </script>
+</body>
+</html>

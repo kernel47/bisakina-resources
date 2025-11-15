@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hôpitaux et Centres Médicaux - Arabie Saoudite</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            padding: 20px;
+            color: #333;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, #1987b7, #4194b8);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+        
+        h1 {
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .search-container {
+            max-width: 500px;
+            margin: 20px auto;
+            position: relative;
+        }
+        
+        #search {
+            width: 100%;
+            padding: 12px 45px 12px 20px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        #search:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+        }
+        
+        .accordion {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .accordion-item {
+            background-color: #fff;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .accordion-header {
+            padding: 18px 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #1987b7;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .accordion-header:hover {
+            background-color: #1987b7;
+        }
+        
+        .city-icon {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .accordion-content {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: #f9f9f9;
+        }
+        
+        .accordion-content.active {
+            max-height: 1000px;
+            padding: 20px;
+        }
+        
+        .hospital-info {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .hospital-info:last-child {
+            border-bottom: none;
+        }
+        
+        .hospital-name {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hospital-name i {
+            margin-right: 10px;
+            color: #3498db;
+        }
+        
+        .hospital-details {
+            padding-left: 5px;
+        }
+        
+        .hospital-details p {
+            margin-bottom: 10px;
+            line-height: 1.5;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .detail-icon {
+            width: 24px;
+            margin-right: 10px;
+            color: #2c3e50;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        
+        .phone-link {
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        
+        .phone-link:hover {
+            background-color: #ebf5fb;
+            text-decoration: underline;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 30px;
+            font-style: italic;
+            color: #7f8c8d;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .icon {
+            transition: transform 0.3s;
+        }
+        
+        .icon.rotated {
+            transform: rotate(180deg);
+        }
+        
+        .emergency {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .medical-center {
+            background-color: #e8f4fc;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .medical-center h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .medical-center h4 i {
+            margin-right: 8px;
+            color: #3498db;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            header {
+                padding: 20px 15px;
+            }
+            
+            h1 {
+                font-size: 1.6rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            #search {
+                padding: 10px 40px 10px 15px;
+                font-size: 14px;
+            }
+            
+            .accordion-header {
+                padding: 15px;
+                font-size: 1rem;
+            }
+            
+            .accordion-content {
+                padding: 0 15px;
+            }
+            
+            .accordion-content.active {
+                padding: 15px;
+            }
+            
+            .hospital-details p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-hospital"></i> Hôpitaux et Centres Médicaux</h1>
+        <p class="subtitle">Arabie Saoudite - Soins d'urgence et services médicaux</p>
+        
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Rechercher une ville ou un hôpital...">
+            <div class="search-icon">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+    </header>
+    
+    <div class="accordion" id="hospitals-accordion">
+        <!-- Les éléments d'accordéon seront générés par JavaScript -->
+    </div>
+
+    <script>
+        // Données des hôpitaux
+        const hospitalsData = [
+            {
+                city: "Masjid al-Haram (La Mecque)",
+                icon: "🕋",
+                hospitals: [
+                    {
+                        name: "Centre d'urgence n°1",
+                        details: [
+                            {icon: "map-marker-alt", text: "Premier étage de l'extension King Fahd, près de la porte 88"},
+                            {icon: "door-open", text: "Accès : Via les portes 84 à 88"},
+                            {icon: "clock", text: "Ouvert 24h/24 pour les pèlerins"}
+                        ]
+                    },
+                    {
+                        name: "Centre d'urgence n°2",
+                        details: [
+                            {icon: "map-marker-alt", text: "Sous-sol de la zone Sa'i, près de la porte As-Salam"},
+                            {icon: "walking", text: "Idéal pour ceux effectuant le rituel du Sa'i"},
+                            {icon: "clock", text: "Ouvert 24h/24 pour les pèlerins"}
+                        ]
+                    },
+                    {
+                        name: "Centre d'urgence n°3",
+                        details: [
+                            {icon: "map-marker-alt", text: "Portique saoudien, près de la porte Ismail"},
+                            {icon: "map", text: "Situé dans la cour sud de la mosquée"},
+                            {icon: "clock", text: "Ouvert 24h/24 pour les pèlerins"}
+                        ]
+                    },
+                    {
+                        name: "Centre d'urgence n°4",
+                        details: [
+                            {icon: "map-marker-alt", text: "Premier étage du portique saoudien, à proximité du pont Ajyad"},
+                            {icon: "road", text: "Facilement accessible depuis le pont Ajyad"},
+                            {icon: "clock", text: "Ouvert 24h/24 pour les pèlerins"}
+                        ]
+                    }
+                ]
+            },
+            {
+                city: "La Mecque - Ville",
+                icon: "🏙️",
+                hospitals: [
+                    {
+                        name: "Ajyad Emergency Hospital",
+                        details: [
+                            {icon: "map-marker-alt", text: "À 500 m de la Mosquée sacrée (Al-Haram), derrière la Tour de l'Horloge"},
+                            {icon: "stethoscope", text: "Soins d'urgence rapides pour pèlerins"},
+                            {icon: "map-pin", text: "GPS : 21.4185° N, 39.8276° E"},
+                            {icon: "car", text: "Conseil d'accès : À pied depuis la mosquée (Bab Ajyad ou Bab Malik Abdul Aziz), ou taxi en cas d'incapacité de marcher"}
+                        ]
+                    },
+                    {
+                        name: "King Abdullah Medical City",
+                        details: [
+                            {icon: "map-marker-alt", text: "Route King Abdulaziz, à 6 km du Haram"},
+                            {icon: "heartbeat", text: "Centre de soins tertiaires, cardiologie, oncologie, urgences"},
+                            {icon: "map-pin", text: "GPS : 21.4432° N, 39.8301° E"},
+                            {icon: "car", text: "Conseil d'accès : Prendre un taxi/Careem depuis la Tour de l'Horloge (~10-15 min), bien connu des chauffeurs"}
+                        ]
+                    }
+                ]
+            },
+            {
+                city: "Médine (Madinah)",
+                icon: "🕌",
+                hospitals: [
+                    {
+                        name: "Madinah Medical Emergency Center",
+                        details: [
+                            {icon: "map-marker-alt", text: "Juste à côté de la porte Bab Al-Salam (ouest de la Mosquée du Prophète)"},
+                            {icon: "first-aid", text: "Urgences immédiates pour pèlerins, accès direct depuis l'esplanade"},
+                            {icon: "map-pin", text: "GPS : 24.4685° N, 39.6102° E"},
+                            {icon: "walking", text: "Conseil d'accès : Accessible à pied depuis les hôtels autour du Haram (portes ouest et nord)"}
+                        ]
+                    },
+                    {
+                        name: "Al Ansar Emergency Hospital",
+                        details: [
+                            {icon: "map-marker-alt", text: "Sud-est de la Mosquée, à environ 1 km"},
+                            {icon: "user-md", text: "Urgences, médecine interne, accessible aux visiteurs"},
+                            {icon: "map-pin", text: "GPS : 24.4660° N, 39.6088° E"},
+                            {icon: "car", text: "Conseil d'accès : 3–5 min en taxi ou 10–15 min à pied depuis la mosquée en passant par le sud"}
+                        ]
+                    }
+                ]
+            },
+            {
+                city: "Jeddah",
+                icon: "🌊",
+                hospitals: [
+                    {
+                        name: "King Fahd Hospital",
+                        details: [
+                            {icon: "map-marker-alt", text: "Quartier Al Balad (centre historique)"},
+                            {icon: "hospital", text: "Grand hôpital public avec service d'urgence 24h/24"},
+                            {icon: "map-pin", text: "GPS : 21.5008° N, 39.2080° E"},
+                            {icon: "car", text: "Conseil d'accès : Taxi/Careem rapide depuis Corniche ou Al Balad (~10 min), ou depuis aéroport (~30 min)"}
+                        ]
+                    },
+                    {
+                        name: "Saudi German Hospital",
+                        details: [
+                            {icon: "map-marker-alt", text: "Quartier Al Salamah (nord de Jeddah)"},
+                            {icon: "procedures", text: "Établissement privé moderne avec soins haut de gamme"},
+                            {icon: "map-pin", text: "GPS : 21.5943° N, 39.1897° E"},
+                            {icon: "car", text: "Conseil d'accès : Recommandé pour ceux séjournant au nord (zone d'aéroport ou hôtels de luxe), taxi ou Uber conseillé"}
+                        ]
+                    }
+                ]
+            },
+            {
+                city: "Riyad (Riyadh)",
+                icon: "🏢",
+                hospitals: [
+                    {
+                        name: "King Faisal Specialist Hospital",
+                        details: [
+                            {icon: "map-marker-alt", text: "Quartier Al Malaz, centre-ville"},
+                            {icon: "star-of-life", text: "Référence nationale, soins spécialisés et urgences"},
+                            {icon: "map-pin", text: "GPS : 24.6877° N, 46.7106° E"},
+                            {icon: "car", text: "Conseil d'accès : Depuis le quartier d'Olaya ou Al-Murabba : taxi/Uber recommandé (~10-15 min)"}
+                        ]
+                    },
+                    {
+                        name: "King Saud Medical City",
+                        details: [
+                            {icon: "map-marker-alt", text: "Quartier Al Murabba"},
+                            {icon: "hospital-alt", text: "Hôpital public majeur, très actif pour les urgences"},
+                            {icon: "map-pin", text: "GPS : 24.6691° N, 46.6946° E"},
+                            {icon: "car", text: "Conseil d'accès : Facilement accessible par taxi/Careem depuis les hôtels ou le quartier diplomatique"}
+                        ]
+                    }
+                ]
+            },
+            {
+                city: "Taïf",
+                icon: "🏔️",
+                hospitals: [
+                    {
+                        name: "King Salman Specialized Hospital",
+                        details: [
+                            {icon: "map-marker-alt", text: "Centre-ville de Taïf"},
+                            {icon: "clinic-medical", text: "Hôpital moderne, bien équipé pour soins d'urgence et hospitalisation"},
+                            {icon: "map-pin", text: "GPS : 21.2833° N, 40.4167° E"},
+                            {icon: "car", text: "Conseil d'accès : Prendre un taxi depuis le centre-ville ou tout hôtel de la ville, environ 5-10 min"}
+                        ]
+                    }
+                ]
+            },
+            {
+                city: "Yanbu",
+                icon: "🌊",
+                hospitals: [
+                    {
+                        name: "Yanbu General Hospital",
+                        details: [
+                            {icon: "map-marker-alt", text: "Quartier Al-Bandar, centre-ville de Yanbu"},
+                            {icon: "hospital-user", text: "Principal hôpital public de la ville avec service d'urgences"},
+                            {icon: "map-pin", text: "GPS : 24.0890° N, 38.0630° E"},
+                            {icon: "car", text: "Conseil d'accès : Accessible rapidement en taxi depuis les hôtels du front de mer ou du centre"}
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        // Fonction pour générer les éléments d'accordéon
+        function generateAccordion() {
+            const accordionContainer = document.getElementById('hospitals-accordion');
+            accordionContainer.innerHTML = '';
+            
+            hospitalsData.forEach((cityData, index) => {
+                const accordionItem = document.createElement('div');
+                accordionItem.className = 'accordion-item';
+                accordionItem.dataset.city = cityData.city.toLowerCase();
+                
+                const accordionHeader = document.createElement('div');
+                accordionHeader.className = 'accordion-header';
+                accordionHeader.innerHTML = `
+                    <span><span class="city-icon">${cityData.icon}</span> ${cityData.city}</span>
+                    <span class="icon">▼</span>
+                `;
+                
+                const accordionContent = document.createElement('div');
+                accordionContent.className = 'accordion-content';
+                
+                cityData.hospitals.forEach(hospital => {
+                    const hospitalInfo = document.createElement('div');
+                    hospitalInfo.className = 'hospital-info';
+                    
+                    const hospitalName = document.createElement('div');
+                    hospitalName.className = 'hospital-name';
+                    hospitalName.innerHTML = `<i class="fas fa-hospital"></i> ${hospital.name}`;
+                    
+                    const hospitalDetails = document.createElement('div');
+                    hospitalDetails.className = 'hospital-details';
+                    
+                    hospital.details.forEach(detail => {
+                        const p = document.createElement('p');
+                        
+                        const iconSpan = document.createElement('span');
+                        iconSpan.className = 'detail-icon';
+                        iconSpan.innerHTML = `<i class="fas fa-${detail.icon}"></i>`;
+                        p.appendChild(iconSpan);
+                        
+                        const textSpan = document.createElement('span');
+                        textSpan.textContent = detail.text;
+                        p.appendChild(textSpan);
+                        
+                        hospitalDetails.appendChild(p);
+                    });
+                    
+                    hospitalInfo.appendChild(hospitalName);
+                    hospitalInfo.appendChild(hospitalDetails);
+                    accordionContent.appendChild(hospitalInfo);
+                });
+                
+                accordionItem.appendChild(accordionHeader);
+                accordionItem.appendChild(accordionContent);
+                accordionContainer.appendChild(accordionItem);
+                
+                // Ajouter l'événement de clic
+                accordionHeader.addEventListener('click', () => {
+                    const isActive = accordionContent.classList.contains('active');
+                    
+                    // Fermer tous les autres accordéons
+                    document.querySelectorAll('.accordion-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    document.querySelectorAll('.icon').forEach(icon => {
+                        icon.classList.remove('rotated');
+                    });
+                    
+                    // Ouvrir l'accordéon cliqué s'il n'était pas déjà actif
+                    if (!isActive) {
+                        accordionContent.classList.add('active');
+                        accordionHeader.querySelector('.icon').classList.add('rotated');
+                    }
+                });
+            });
+        }
+        
+        // Fonction de recherche
+        function setupSearch() {
+            const searchInput = document.getElementById('search');
+            
+            searchInput.addEventListener('input', () => {
+                const searchTerm = searchInput.value.toLowerCase();
+                const accordionItems = document.querySelectorAll('.accordion-item');
+                
+                let hasVisibleItems = false;
+                
+                accordionItems.forEach(item => {
+                    const cityName = item.dataset.city;
+                    const hospitalNames = Array.from(item.querySelectorAll('.hospital-name'))
+                        .map(name => name.textContent.toLowerCase());
+                    
+                    const matchesCity = cityName.includes(searchTerm);
+                    const matchesHospital = hospitalNames.some(name => name.includes(searchTerm));
+                    
+                    if (matchesCity || matchesHospital) {
+                        item.style.display = 'block';
+                        hasVisibleItems = true;
+                        
+                        // Ouvrir l'accordéon si un hôpital correspond
+                        if (matchesHospital && searchTerm) {
+                            item.querySelector('.accordion-content').classList.add('active');
+                            item.querySelector('.icon').classList.add('rotated');
+                        }
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                
+                // Afficher un message si aucun résultat n'est trouvé
+                const noResults = document.getElementById('no-results-message');
+                if (!hasVisibleItems) {
+                    if (!noResults) {
+                        const noResultsMessage = document.createElement('div');
+                        noResultsMessage.id = 'no-results-message';
+                        noResultsMessage.className = 'no-results';
+                        noResultsMessage.textContent = 'Aucun hôpital ou ville ne correspond à votre recherche.';
+                        document.getElementById('hospitals-accordion').appendChild(noResultsMessage);
+                    }
+                } else if (noResults) {
+                    noResults.remove();
+                }
+            });
+        }
+        
+        // Initialiser la page
+        document.addEventListener('DOMContentLoaded', () => {
+            generateAccordion();
+            setupSearch();
+            
+            // Ouvrir le premier élément par défaut
+            const firstItem = document.querySelector('.accordion-item');
+            if (firstItem) {
+                firstItem.querySelector('.accordion-header').click();
+            }
+        });
+    </script>
+</body>
+</html>

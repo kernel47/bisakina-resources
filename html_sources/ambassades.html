@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Ambassades</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css"/>
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            padding: 20px;
+            color: #333;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .search-container {
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        #search {
+            width: 100%;
+            padding: 12px 45px 12px 20px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        #search:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+        }
+        
+        .accordion {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .accordion-item {
+            background-color: #fff;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .accordion-header {
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #fff;
+            color: #1987b7;
+            font-weight: bold;
+        }
+         
+        .flag-icon {
+            width: 30px;
+            height: 20px;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+        }
+        
+        .accordion-content {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: #f9f9f9;
+        }
+        
+        .accordion-content.active {
+            max-height: 1000px;
+            padding: 20px;
+        }
+        
+        .embassy-info {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .embassy-info:last-child {
+            border-bottom: none;
+        }
+        
+        .embassy-type {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px dashed #ddd;
+            font-size: 1.1rem;
+        }
+        
+        .embassy-details {
+            padding-left: 5px;
+        }
+        
+        .embassy-details p {
+            margin-bottom: 10px;
+            line-height: 1.5;
+            display: flex;
+            align-items: center;
+        }
+        
+        .detail-icon {
+            width: 24px;
+            margin-right: 10px;
+            color: #2c3e50;
+            text-align: center;
+        }
+        
+        .phone-link {
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        
+        .phone-link:hover {
+            background-color: #ebf5fb;
+            text-decoration: underline;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 30px;
+            font-style: italic;
+            color: #7f8c8d;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .icon {
+            transition: transform 0.3s;
+        }
+        
+        .icon.rotated {
+            transform: rotate(180deg);
+        }
+        
+        .emergency {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            header {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.3rem;
+            }
+            
+            #search {
+                padding: 10px 40px 10px 15px;
+                font-size: 14px;
+            }
+            
+            .accordion-header {
+                padding: 12px 15px;
+                font-size: 0.95rem;
+            }
+            
+            .accordion-content {
+                padding: 0 15px;
+            }
+            
+            .accordion-content.active {
+                padding: 15px;
+            }
+            
+            .embassy-details p {
+                font-size: 0.9rem;
+            }
+            
+            .flag-icon {
+                width: 25px;
+                height: 16px;
+                margin-right: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header> 
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Rechercher un pays...">
+            <div class="search-icon">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+    </header>
+    
+    <div class="accordion" id="embassies-accordion">
+        <!-- Les éléments d'accordéon seront générés par JavaScript -->
+    </div>
+
+    <script>
+        // Données des ambassades avec codes de drapeaux
+        const embassiesData = [
+            {
+                country: "France",
+                flag: "fr",
+                embassies: [
+                    {
+                        type: "Ambassade à Riyad",
+                        details: [
+                            {icon: "map-marker-alt", text: "Prince Turki Bin Abdul Aziz Al Awwal Rd, Al Olaya, Riyadh 12214"},
+                            {icon: "phone", text: "+966 11 434 4100", link: "+966114344100"},
+                            {icon: "exclamation-triangle", text: "Urgence : +966 55 546 3323", link: "+966555463323", emergency: true},
+                            {icon: "envelope", text: "admin-francais.riyad-amba@diplomatie.gouv.fr", link: "mailto:admin-francais.riyad-amba@diplomatie.gouv.fr"},
+                            {icon: "globe", text: "sa.ambafrance.org", link: "https://sa.ambafrance.org"},
+                            {icon: "clock", text: "Dimanche à jeudi, 7h45 - 15h30"}
+                        ]
+                    },
+                    {
+                        type: "Consulat général à Djeddah",
+                        details: [
+                            {icon: "map-marker-alt", text: "13th St, Al-Shati District, Jeddah"},
+                            {icon: "phone", text: "+966 12 669 1800", link: "+966126691800"},
+                            {icon: "exclamation-triangle", text: "Urgence : +966 55 546 3323", link: "+966555463323", emergency: true},
+                            {icon: "envelope", text: "consulat.djeddah@diplomatie.gouv.fr", link: "mailto:consulat.djeddah@diplomatie.gouv.fr"},
+                            {icon: "clock", text: "Dimanche à jeudi, 8h00 - 15h00"}
+                        ]
+                    }
+                ]
+            },
+            {
+                country: "Royaume-Uni",
+                flag: "gb",
+                embassies: [
+                    {
+                        type: "Ambassade à Riyad",
+                        details: [
+                            {icon: "map-marker-alt", text: "Embassy Road, Diplomatic Quarter, Riyadh"},
+                            {icon: "phone", text: "+966 11 488 0088", link: "+966114880088"},
+                            {icon: "exclamation-triangle", text: "Urgence : +44 207 008 1500 (pour urgence depuis l'étranger)", link: "+442070081500", emergency: true},
+                            {icon: "envelope", text: "riyadh.consular@fcdo.gov.uk", link: "mailto:riyadh.consular@fcdo.gov.uk"},
+                            {icon: "globe", text: "ukinsaudiarabia.fco.gov.uk", link: "https://ukinsaudiarabia.fco.gov.uk"},
+                            {icon: "clock", text: "Dimanche à jeudi, 8h30 - 16h00"}
+                        ]
+                    },
+                    {
+                        type: "Consulat à Djeddah",
+                        details: [
+                            {icon: "map-marker-alt", text: "16th St, Al Khalidiyyah District, Jeddah"},
+                            {icon: "phone", text: "+966 12 668 0280", link: "+966126680280"},
+                            {icon: "exclamation-triangle", text: "Urgence : +44 207 008 1500", link: "+442070081500", emergency: true},
+                            {icon: "clock", text: "Dimanche à jeudi, 8h00 - 15h00"}
+                        ]
+                    }
+                ]
+            },
+            {
+                country: "Allemagne",
+                flag: "de",
+                embassies: [
+                    {
+                        type: "Ambassade à Riyad",
+                        details: [
+                            {icon: "map-marker-alt", text: "Diplomatic Quarter, Riyadh"},
+                            {icon: "phone", text: "+966 11 277 6900", link: "+966112776900"},
+                            {icon: "exclamation-triangle", text: "Urgence : +49 30 5000 3000 (Allemagne)", link: "+493050003000", emergency: true},
+                            {icon: "envelope", text: "info@riad.diplo.de", link: "mailto:info@riad.diplo.de"},
+                            {icon: "globe", text: "saudiarabien.diplo.de", link: "https://saudiarabien.diplo.de"},
+                            {icon: "clock", text: "Dimanche à jeudi, 8h00 - 15h00"}
+                        ]
+                    }
+                ]
+            },
+            {
+                country: "Algérie",
+                flag: "dz",
+                embassies: [
+                    {
+                        type: "Ambassade à Riyad",
+                        details: [
+                            {icon: "map-marker-alt", text: "Diplomatic Quarter, Riyadh"},
+                            {icon: "phone", text: "+966 11 488 2230", link: "+966114882230"},
+                            {icon: "exclamation-triangle", text: "Urgence : +213 770 00 00 00 (Algérie)", link: "+213770000000", emergency: true},
+                            {icon: "envelope", text: "algriyadh@hotmail.com", link: "mailto:algriyadh@hotmail.com"},
+                            {icon: "clock", text: "Dimanche à jeudi, 8h00 - 15h00"}
+                        ]
+                    }
+                ]
+            },
+            {
+                country: "Belgique",
+                flag: "be",
+                embassies: [
+                    {
+                        type: "Ambassade à Riyad",
+                        details: [
+                            {icon: "map-marker-alt", text: "Diplomatic Quarter, Riyadh"},
+                            {icon: "phone", text: "+966 11 488 0011", link: "+966114880011"},
+                            {icon: "exclamation-triangle", text: "Urgence : +32 2 501 81 11 (Belgique)", link: "+3225018111", emergency: true},
+                            {icon: "envelope", text: "riyadh.visa@diplobel.fed.be", link: "mailto:riyadh.visa@diplobel.fed.be"},
+                            {icon: "globe", text: "saudiarabia.diplomatie.belgium.be", link: "https://saudiarabia.diplomatie.belgium.be"},
+                            {icon: "clock", text: "Dimanche à jeudi, 8h00 - 15h30"}
+                        ]
+                    }
+                ]
+            },
+            {
+                country: "Côte d'Ivoire",
+                flag: "ci",
+                embassies: [
+                    {
+                        type: "Ambassade à Riyad",
+                        details: [
+                            {icon: "map-marker-alt", text: "Diplomatic Quarter, Riyadh"},
+                            {icon: "phone", text: "+966 11 441 0327", link: "+966114410327"},
+                            {icon: "exclamation-triangle", text: "Urgence : +225 20 21 02 10 (Côte d'Ivoire)", link: "+22520210210", emergency: true},
+                            {icon: "envelope", text: "ambacotedivoire.riyadh@gmail.com", link: "mailto:ambacotedivoire.riyadh@gmail.com"},
+                            {icon: "clock", text: "Dimanche à jeudi, 8h00 - 15h00"}
+                        ]
+                    }
+                ]
+            },
+            {
+                country: "États-Unis",
+                flag: "us",
+                embassies: [
+                    {
+                        type: "Ambassade à Riyad",
+                        details: [
+                            {icon: "map-marker-alt", text: "Embassy Road, Diplomatic Quarter, Riyadh"},
+                            {icon: "phone", text: "+966 11 488 3800", link: "+966114883800"},
+                            {icon: "exclamation-triangle", text: "Urgence : +1 888 407 4747 (depuis les USA)", link: "+18884074747", emergency: true},
+                            {icon: "envelope", text: "askconsul@state.gov", link: "mailto:askconsul@state.gov"},
+                            {icon: "globe", text: "sa.usembassy.gov", link: "https://sa.usembassy.gov"},
+                            {icon: "clock", text: "Dimanche à jeudi, 7h30 - 16h30"}
+                        ]
+                    },
+                    {
+                        type: "Consulat à Djeddah",
+                        details: [
+                            {icon: "map-marker-alt", text: "Tahlia Street, Jeddah"},
+                            {icon: "phone", text: "+966 12 667 0080", link: "+966126670080"},
+                            {icon: "clock", text: "Dimanche à jeudi, 8h00 - 16h00"}
+                        ]
+                    }
+                ]
+            },
+            {
+                country: "Espagne",
+                flag: "es",
+                embassies: [
+                    {
+                        type: "Ambassade à Riyad",
+                        details: [
+                            {icon: "map-marker-alt", text: "Diplomatic Quarter, Riyadh"},
+                            {icon: "phone", text: "+966 11 488 0606", link: "+966114880606"},
+                            {icon: "exclamation-triangle", text: "Urgence : +34 91 394 80 00 (Espagne)", link: "+34913948000", emergency: true},
+                            {icon: "envelope", text: "emb.riad.info@maec.es", link: "mailto:emb.riad.info@maec.es"},
+                            {icon: "globe", text: "exteriores.gob.es", link: "https://exteriores.gob.es"},
+                            {icon: "clock", text: "Dimanche à jeudi, 8h00 - 15h00"}
+                        ]
+                    }
+                ]
+            },
+            {
+                country: "Égypte",
+                flag: "eg",
+                embassies: [
+                    {
+                        type: "Ambassade à Riyad",
+                        details: [
+                            {icon: "map-marker-alt", text: "Diplomatic Quarter, Riyadh"},
+                            {icon: "phone", text: "+966 11 488 2437", link: "+966114882437"},
+                            {icon: "exclamation-triangle", text: "Urgence : +20 2 2794 8888 (Égypte)", link: "+20227948888", emergency: true},
+                            {icon: "envelope", text: "egyemb.riyadh@gmail.com", link: "mailto:egyemb.riyadh@gmail.com"},
+                            {icon: "clock", text: "Dimanche à jeudi, 8h00 - 15h00"}
+                        ]
+                    }
+                ]
+            },
+            {
+                country: "Ghana",
+                flag: "gh",
+                embassies: [
+                    {
+                        type: "Ambassade à Riyad",
+                        details: [
+                            {icon: "map-marker-alt", text: "Diplomatic Quarter, Riyadh"},
+                            {icon: "phone", text: "+966 11 448 5648", link: "+966114485648"},
+                            {icon: "exclamation-triangle", text: "Urgence : +233 30 221 5601 (Ghana)", link: "+233302215601", emergency: true},
+                            {icon: "envelope", text: "ghanaembassyriyadh@gmail.com", link: "mailto:ghanaembassyriyadh@gmail.com"},
+                            {icon: "clock", text: "Dimanche à jeudi, 8h00 - 15h00"}
+                        ]
+                    }
+                ]
+            },
+            {
+                country: "Italie",
+                flag: "it",
+                embassies: [
+                    {
+                        type: "Ambassade à Riyad",
+                        details: [
+                            {icon: "map-marker-alt", text: "3639 Amr Aldamri St, Diplomatic Quarter, Riyadh"},
+                            {icon: "phone", text: "+966 11 488 1212", link: "+966114881212"},
+                            {icon: "exclamation-triangle", text: "Urgence : +39 06 36225 (Italie)", link: "+390636225", emergency: true},
+                            {icon: "envelope", text: "segreteria.riad@esteri.it", link: "mailto:segreteria.riad@esteri.it"},
+                            {icon: "globe", text: "ambriad.esteri.it", link: "https://ambriad.esteri.it"},
+                            {icon: "clock", text: "Dimanche à jeudi, 8h00 - 15h00"}
+                        ]
+                    }
+                ]
+            },
+            {
+                country: "Maroc",
+                flag: "ma",
+                embassies: [
+                    {
+                        type: "Ambassade à Riyad",
+                        details: [
+                            {icon: "map-marker-alt", text: "Diplomatic Quarter, Riyadh"},
+                            {icon: "phone", text: "+966 11 488 0866", link: "+966114880866"},
+                            {icon: "exclamation-triangle", text: "Urgence : +212 537 77 76 31 (Maroc)", link: "+212537777631", emergency: true},
+                            {icon: "envelope", text: "ambamaroc.riyad@gmail.com", link: "mailto:ambamaroc.riyad@gmail.com"},
+                            {icon: "globe", text: "ambamaroc-saudi.com", link: "https://ambamaroc-saudi.com"},
+                            {icon: "clock", text: "Dimanche à jeudi, 8h30 - 15h30"}
+                        ]
+                    }
+                ]
+            },
+            {
+                country: "Mali",
+                flag: "ml",
+                embassies: [
+                    {
+                        type: "Ambassade à Riyad",
+                        details: [
+                            {icon: "map-marker-alt", text: "Diplomatic Quarter, Riyadh"},
+                            {icon: "phone", text: "+966 11 488 2917", link: "+966114882917"},
+                            {icon: "exclamation-triangle", text: "Urgence : +223 20 22 22 22 (Mali)", link: "+22320222222", emergency: true},
+                            {icon: "envelope", text: "amb.riyadh@maliembassy.sa", link: "mailto:amb.riyadh@maliembassy.sa"},
+                            {icon: "clock", text: "Dimanche à jeudi, 8h00 - 15h00"}
+                        ]
+                    }
+                ]
+            },
+            {
+                country: "Nigeria",
+                flag: "ng",
+                embassies: [
+                    {
+                        type: "Ambassade à Riyad",
+                        details: [
+                            {icon: "map-marker-alt", text: "Diplomatic Quarter, Riyadh"},
+                            {icon: "phone", text: "+966 11 441 7124", link: "+966114417124"},
+                            {icon: "exclamation-triangle", text: "Urgence : +234 9 523 6040 (Nigeria)", link: "+23495236040", emergency: true},
+                            {icon: "envelope", text: "nigeriaembassyriyadh@yahoo.com", link: "mailto:nigeriaembassyriyadh@yahoo.com"},
+                            {icon: "clock", text: "Dimanche à jeudi, 8h00 - 15h00"}
+                        ]
+                    }
+                ]
+            },
+            {
+                country: "Pays-Bas",
+                flag: "nl",
+                embassies: [
+                    {
+                        type: "Ambassade à Riyad",
+                        details: [
+                            {icon: "map-marker-alt", text: "Abdullah Hizaf Asehmi Street, Diplomatic Quarter, Riyadh"},
+                            {icon: "phone", text: "+966 11 442 2300", link: "+966114422300"},
+                            {icon: "exclamation-triangle", text: "Urgence : +31 70 348 88 88 (Pays-Bas)", link: "+31703488888", emergency: true},
+                            {icon: "envelope", text: "riy@minbusa.nl", link: "mailto:riy@minbusa.nl"},
+                            {icon: "globe", text: "netherlandsandyou.nl", link: "https://netherlandsandyou.nl"},
+                            {icon: "clock", text: "Dimanche à jeudi, 8h00 - 15h00"}
+                        ]
+                    }
+                ]
+            },
+            {
+                country: "Suisse",
+                flag: "ch",
+                embassies: [
+                    {
+                        type: "Ambassade à Riyad",
+                        details: [
+                            {icon: "map-marker-alt", text: "Diplomatic Quarter, Riyadh"},
+                            {icon: "phone", text: "+966 11 488 1291", link: "+966114881291"},
+                            {icon: "exclamation-triangle", text: "Urgence : +41 31 325 25 25 (en Suisse)", link: "+41313252525", emergency: true},
+                            {icon: "envelope", text: "riyadh@eda.admin.ch", link: "mailto:riyadh@eda.admin.ch"},
+                            {icon: "globe", text: "eda.admin.ch", link: "https://eda.admin.ch"},
+                            {icon: "clock", text: "Dimanche à jeudi, 8h00 - 15h30"}
+                        ]
+                    }
+                ]
+            },
+            {
+                country: "Sénégal",
+                flag: "sn",
+                embassies: [
+                    {
+                        type: "Ambassade à Riyad",
+                        details: [
+                            {icon: "map-marker-alt", text: "Diplomatic Quarter, Riyadh"},
+                            {icon: "phone", text: "+966 11 488 1700", link: "+966114881700"},
+                            {icon: "exclamation-triangle", text: "Urgence : +221 33 889 20 20 (Sénégal)", link: "+221338892020", emergency: true},
+                            {icon: "envelope", text: "senegal.riyadh@gmail.com", link: "mailto:senegal.riyadh@gmail.com"},
+                            {icon: "clock", text: "Dimanche à jeudi, 8h00 - 15h00"}
+                        ]
+                    }
+                ]
+            },
+            {
+                country: "Turquie",
+                flag: "tr",
+                embassies: [
+                    {
+                        type: "Ambassade à Riyad",
+                        details: [
+                            {icon: "map-marker-alt", text: "Diplomatic Quarter, Riyadh"},
+                            {icon: "phone", text: "+966 11 482 1966", link: "+966114821966"},
+                            {icon: "exclamation-triangle", text: "Urgence : +90 312 455 55 00 (Turquie)", link: "+903124555500", emergency: true},
+                            {icon: "envelope", text: "info@riyad.emb.mfa.gov.tr", link: "mailto:info@riyad.emb.mfa.gov.tr"},
+                            {icon: "globe", text: "riyad.emb.mfa.gov.tr", link: "https://riyad.emb.mfa.gov.tr"},
+                            {icon: "clock", text: "Dimanche à jeudi, 8h00 - 15h00"}
+                        ]
+                    }
+                ]
+            },
+            {
+                country: "Tunisie",
+                flag: "tn",
+                embassies: [
+                    {
+                        type: "Ambassade à Riyad",
+                        details: [
+                            {icon: "map-marker-alt", text: "Diplomatic Quarter, Riyadh"},
+                            {icon: "phone", text: "+966 11 441 2921", link: "+966114412921"},
+                            {icon: "exclamation-triangle", text: "Urgence : +216 71 345 678 (Tunisie)", link: "+21671345678", emergency: true},
+                            {icon: "envelope", text: "amb.tunis.riadh@gmail.com", link: "mailto:amb.tunis.riadh@gmail.com"},
+                            {icon: "clock", text: "Dimanche à jeudi, 8h00 - 15h00"}
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        // Fonction pour générer les éléments d'accordéon
+        function generateAccordion() {
+            const accordionContainer = document.getElementById('embassies-accordion');
+            accordionContainer.innerHTML = '';
+            
+            embassiesData.forEach((countryData, index) => {
+                const accordionItem = document.createElement('div');
+                accordionItem.className = 'accordion-item';
+                accordionItem.dataset.country = countryData.country.toLowerCase();
+                
+                const accordionHeader = document.createElement('div');
+                accordionHeader.className = 'accordion-header';
+                accordionHeader.innerHTML = `
+                    <span><span class="fi fi-${countryData.flag} flag-icon"></span> ${countryData.country}</span>
+                    <span class="icon">▼</span>
+                `;
+                
+                const accordionContent = document.createElement('div');
+                accordionContent.className = 'accordion-content';
+                
+                countryData.embassies.forEach(embassy => {
+                    const embassyInfo = document.createElement('div');
+                    embassyInfo.className = 'embassy-info';
+                    
+                    const embassyType = document.createElement('div');
+                    embassyType.className = 'embassy-type';
+                    embassyType.textContent = embassy.type;
+                    
+                    const embassyDetails = document.createElement('div');
+                    embassyDetails.className = 'embassy-details';
+                    
+                    embassy.details.forEach(detail => {
+                        const p = document.createElement('p');
+                        
+                        const iconSpan = document.createElement('span');
+                        iconSpan.className = 'detail-icon';
+                        iconSpan.innerHTML = `<i class="fas fa-${detail.icon}"></i>`;
+                        p.appendChild(iconSpan);
+                        
+                        const textSpan = document.createElement('span');
+                        
+                        if (detail.link) {
+                            const link = document.createElement('a');
+                            link.href = detail.link;
+                            link.textContent = detail.text;
+                            
+                            if (detail.link.startsWith('tel:')) {
+                                link.className = 'phone-link';
+                                if (detail.emergency) {
+                                    link.classList.add('emergency');
+                                }
+                            }
+                            
+                            textSpan.appendChild(link);
+                        } else {
+                            textSpan.textContent = detail.text;
+                        }
+                        
+                        p.appendChild(textSpan);
+                        embassyDetails.appendChild(p);
+                    });
+                    
+                    embassyInfo.appendChild(embassyType);
+                    embassyInfo.appendChild(embassyDetails);
+                    accordionContent.appendChild(embassyInfo);
+                });
+                
+                accordionItem.appendChild(accordionHeader);
+                accordionItem.appendChild(accordionContent);
+                accordionContainer.appendChild(accordionItem);
+                
+                // Ajouter l'événement de clic
+                accordionHeader.addEventListener('click', () => {
+                    const isActive = accordionContent.classList.contains('active');
+                    
+                    // Fermer tous les autres accordéons
+                    document.querySelectorAll('.accordion-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    document.querySelectorAll('.icon').forEach(icon => {
+                        icon.classList.remove('rotated');
+                    });
+                    
+                    // Ouvrir l'accordéon cliqué s'il n'était pas déjà actif
+                    if (!isActive) {
+                        accordionContent.classList.add('active');
+                        accordionHeader.querySelector('.icon').classList.add('rotated');
+                    }
+                });
+            });
+        }
+        
+        // Fonction de recherche
+        function setupSearch() {
+            const searchInput = document.getElementById('search');
+            
+            searchInput.addEventListener('input', () => {
+                const searchTerm = searchInput.value.toLowerCase();
+                const accordionItems = document.querySelectorAll('.accordion-item');
+                
+                let hasVisibleItems = false;
+                
+                accordionItems.forEach(item => {
+                    const countryName = item.dataset.country;
+                    
+                    if (countryName.includes(searchTerm)) {
+                        item.style.display = 'block';
+                        hasVisibleItems = true;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                
+                // Afficher un message si aucun résultat n'est trouvé
+                const noResults = document.getElementById('no-results-message');
+                if (!hasVisibleItems) {
+                    if (!noResults) {
+                        const noResultsMessage = document.createElement('div');
+                        noResultsMessage.id = 'no-results-message';
+                        noResultsMessage.className = 'no-results';
+                        noResultsMessage.textContent = 'Aucun pays ne correspond à votre recherche.';
+                        document.getElementById('embassies-accordion').appendChild(noResultsMessage);
+                    }
+                } else if (noResults) {
+                    noResults.remove();
+                }
+            });
+        }
+        
+        // Fonction pour formater les numéros de téléphone
+        function formatPhoneNumbers() {
+            document.querySelectorAll('.phone-link').forEach(link => {
+                // Nettoyer le numéro pour le lien tel:
+                const cleanNumber = link.getAttribute('href').replace(/\s/g, '');
+                link.setAttribute('href', 'tel:' + cleanNumber);
+            });
+        }
+        
+        // Initialiser la page
+        document.addEventListener('DOMContentLoaded', () => {
+            generateAccordion();
+            setupSearch();
+            formatPhoneNumbers();
+            
+            // Ouvrir le premier élément par défaut
+            const firstItem = document.querySelector('.accordion-item');
+            if (firstItem) {
+                firstItem.querySelector('.accordion-header').click();
+            }
+        });
+    </script>
+</body>
+</html>
